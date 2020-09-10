@@ -1,32 +1,42 @@
 #include<stdio.h>
+#include<math.h>
+
+int prime(unsigned long long int a)
+{
+	static unsigned long long int p=0;
+	
+	while(a%2==0)
+	{
+		p=2;
+		a=a/2;
+	}
+	
+	for(int i=3;i<=sqrt(a);i=i+2)
+		{
+			while(a%i==0)
+			{							
+				p=i;
+				a=a/i;											
+			}		
+		}
+	
+	if(a>2)
+	{
+		p=a;
+	}
+	return p;
+}
 
 int main()
 {
-	unsigned int temp=0;
-	unsigned int i=0,j=1,k=0,n=0;
+	unsigned long long int answer=0,n=0;
+
 	
 	printf("Enter the number you want to find the largest prime factor:\t");
-	scanf("%d",&n);
-	printf("\n Factors are :");
-	k=n;
-	while((k)!=0)
-	{
-		if(n%k==0)
-		{
-			temp=k;
-			while((temp)!=0)
-			{
-				if(k%temp==0)
-				{		
-					printf("\n %d",temp);
-				}
-				temp--;
-			}
-			//printf("\n %d",k);
-		}
-		k--;
-	}
-	//printf("\nSum is %d",sum);
-//	printf("\nSum of even numbers is %d",evenSum);
+	scanf("%lld",&n);
+	answer=prime(n);
+
+	printf("\nLargest Prime factor is %lld",answer);
+
 	return 0;
 }
